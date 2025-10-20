@@ -30,12 +30,15 @@
             line-height: 1.7;
             background-color: var(--background-color);
             color: var(--text-color);
+            /* FIX 1: Prevents the entire page from having horizontal scroll caused by children */
+            overflow-x: hidden; 
         }
 
         .container {
             max-width: 900px;
             margin: 20px auto;
-            padding: 0 20px;
+            /* Added smaller padding for very small screens */
+            padding: 0 15px; 
         }
 
         header {
@@ -130,6 +133,8 @@
             overflow-x: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
+            /* FIX 2: Essential for preventing long, non-space separated strings from causing overflow */
+            word-break: break-all; 
         }
         
         a {
@@ -151,12 +156,19 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+             /* Adjusted container padding for a tighter fit on mobile */
+            .container {
+                padding: 0 10px;
+            }
+
             header h1 {
                 font-size: 2rem;
             }
             h2 {
                 font-size: 1.5rem;
             }
+            
+            /* Mobile Table Styles (Card Layout) */
             table, thead, tbody, th, td, tr {
                 display: block;
             }
@@ -168,18 +180,21 @@
             tr {
                 margin-bottom: 15px;
                 border: 1px solid var(--border-color);
+                width: 100%; /* Ensure row takes full width */
             }
             td {
                 border: none;
                 border-bottom: 1px solid #eee;
                 position: relative;
-                padding-left: 50%;
+                /* Increased left padding slightly for better label separation */
+                padding-left: 55%; 
             }
             td:before {
                 position: absolute;
                 top: 12px;
                 left: 15px;
-                width: 45%;
+                /* Adjusted label width */
+                width: 40%; 
                 padding-right: 10px;
                 white-space: nowrap;
                 font-weight: bold;
@@ -248,7 +263,7 @@
 
         <section id="components">
             <h2>📜 4. Components of an SSL Certificate</h2>
-             <table>
+              <table>
                 <thead>
                     <tr>
                         <th>Component</th>
@@ -311,20 +326,20 @@
             <h2>🧾 7. Example SSL Certificate Details</h2>
             <pre><code>Certificate:
     Data:
-        Version: 3 (0x2)
-        Serial Number: 1234567890ABCDEF
+      Version: 3 (0x2)
+      Serial Number: 1234567890ABCDEF
     Signature Algorithm: sha256WithRSAEncryption
     Issuer: CN=Let's Encrypt Authority X3, O=Let's Encrypt, C=US
     Validity:
-        Not Before: Oct 18 00:00:00 2025 GMT
-        Not After : Jan 18 23:59:59 2026 GMT
+      Not Before: Oct 18 00:00:00 2025 GMT
+      Not After : Jan 18 23:59:59 2026 GMT
     Subject: CN=example.com
     Subject Public Key Info:
-        Public Key Algorithm: rsaEncryption
-        RSA Public-Key: (2048 bit)
+      Public Key Algorithm: rsaEncryption
+      RSA Public-Key: (2048 bit)
     X509v3 extensions:
-        X509v3 Subject Alternative Name:
-            DNS:example.com, DNS:www.example.com</code></pre>
+      X509v3 Subject Alternative Name:
+        DNS:example.com, DNS:www.example.com</code></pre>
         </section>
         
         <section id="ssl-vs-tls">
